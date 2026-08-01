@@ -1,1 +1,45 @@
 /* You can add global styles to this file, and also import other style files */
+:root{
+    --navy-900:#0A1F3D;
+    --navy-800:#0F2A4E;
+    --navy-700:#15396A;
+    --blue-600:#2563AE;
+    --blue-500:#3B82D6;
+    --blue-400:#6BA6E8;
+    --blue-300:#9CC6F2;
+    --blue-100:#EAF3FD;
+    --blue-050:#F5F9FE;
+    --bg:#FBFCFE;
+    --surface:#FFFFFF;
+    --ink:#152238;
+    --muted:#5B6B80;
+    --line:#DEE7F2;
+    --whatsapp:#25D366;
+    --whatsapp-dark:#1FB958;
+    --radius-lg:26px;
+    --radius-md:16px;
+    --radius-sm:10px;
+    --shadow-sm:0 4px 16px rgba(10,31,61,.06);
+    --shadow-md:0 18px 40px rgba(10,31,61,.10);
+    --font-display:'Space Grotesk',sans-serif;
+    --font-body:'Inter',sans-serif;
+    --font-mono:'IBM Plex Mono',monospace;
+    --container:1180px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:var(--font-body);
+    color:var(--ink);
+    background:var(--bg);
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;}
+  h1,h2,h3,h4,p{margin:0;}
+  .wrap{max-width:var(--container);margin:0 auto;padding:0 24px;}
+  section{position:relative;}
+  ::selection{background:var(--blue-300);color:var(--navy-900);}
+  :focus-visible{outline:3px solid var(--blue-500);outline-offset:3px;}
