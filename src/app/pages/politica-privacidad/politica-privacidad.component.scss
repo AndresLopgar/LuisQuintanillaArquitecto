@@ -1,0 +1,80 @@
+// Contenedor principal adaptado al diseño de la landing
+.legal-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 80px 20px;
+  font-family: var(--font-sans, system-ui, -apple-system, sans-serif);
+  color: var(--text, #333333);
+  line-height: 1.7;
+
+  // Título principal
+  h1 {
+    font-size: clamp(26px, 4vw, 36px);
+    font-weight: 750;
+    color: var(--navy-900, #0a192f);
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+  }
+
+  // Fecha de última actualización
+  .update-date {
+    font-size: 13.5px;
+    color: var(--muted, #666666);
+    font-family: var(--font-mono, monospace);
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--line, #eaeaea);
+    padding-bottom: 16px;
+  }
+
+  // Bloques de secciones legales
+  section {
+    margin-bottom: 32px;
+
+    h2 {
+      font-size: 19px;
+      font-weight: 650;
+      color: var(--navy-900, #0a192f);
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+
+    p {
+      margin-bottom: 12px;
+      font-size: 15px;
+    }
+
+    ul {
+      margin-top: 8px;
+      margin-bottom: 16px;
+      padding-left: 20px;
+
+      li {
+        font-size: 15px;
+        margin-bottom: 6px;
+      }
+    }
+  }
+
+  // Enlace de vuelta al inicio con estilo de botón sutil o enlace corporativo
+  .back-home {
+    margin-top: 50px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line, #eaeaea);
+
+    a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--navy-900, #0a192f);
+      font-weight: 650;
+      font-size: 14.5px;
+      text-decoration: none;
+      transition: opacity 0.2s ease;
+
+      &:hover {
+        opacity: 0.75;
+        text-decoration: underline;
+      }
+    }
+  }
+}
