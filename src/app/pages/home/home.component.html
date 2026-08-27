@@ -506,10 +506,32 @@
         </label>
       </div>
 
-      <div class="form-submit" style="text-align: center; margin-top: 30px;">
-        <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">Enviar consulta por WhatsApp</button>
-        <p style="margin-top: 12px; font-size: 13.5px; color: var(--muted); font-family: var(--font-mono);">Se abrirá WhatsApp con tu mensaje listo para enviar.</p>
+      <!-- Botones de envío separados -->
+      <div class="form-submit" style="display: flex; gap: 16px; justify-content: center; margin-top: 30px; flex-wrap: wrap;">
+        
+        <!-- Botón de WhatsApp -->
+        <button type="button" 
+                (click)="enviarAWhatsApp($event)" 
+                [disabled]="!consulta.privacidad" 
+                class="btn-primary"
+                [ngClass]="{'btn-disabled': !consulta.privacidad}"
+                style="flex: 1; min-width: 240px; justify-content: center;">
+          Enviar por WhatsApp
+        </button>
+
+        <!-- Botón de Correo / Gmail -->
+        <button type="button" 
+                (click)="enviarPorCorreo($event)" 
+                [disabled]="!consulta.privacidad" 
+                class="btn-secondary-action"
+                style="flex: 1; min-width: 240px;">
+          Enviar por Correo
+        </button>
+
       </div>
+      <p style="text-align: center; margin-top: 12px; font-size: 13.5px; color: var(--muted); font-family: var(--font-mono);">
+        Elige tu vía preferida para hacernos llegar la consulta.
+      </p>
     </form>
   </div>
 </section>

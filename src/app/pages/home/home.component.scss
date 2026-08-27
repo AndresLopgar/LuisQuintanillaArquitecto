@@ -130,6 +130,37 @@ h2.section-title {
   }
 }
 
+.btn-secondary-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: var(--navy-900); /* Usa el azul marino principal de la web */
+  color: #fff;
+  padding: 16px 28px;
+  border-radius: 100px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 16px;
+  box-shadow: 0 10px 24px rgba(10,31,61,.2);
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+  border: none;
+  cursor: pointer;
+  
+  svg {
+    width: 20px;
+    height: 20px;
+    fill: #fff;
+    flex-shrink: 0;
+  }
+  
+  &:hover {
+    transform: translateY(-2px);
+    background: var(--navy-700); /* Se aclara ligeramente al pasar el ratón */
+    box-shadow: 0 14px 28px rgba(10,31,61,.3);
+  }
+}
+
 .btn-ghost {
   display: inline-flex;
   align-items: center;
@@ -874,6 +905,12 @@ nav.links {
       color: var(--muted);
       padding: 10px 0;
     }
+  }
+  button:disabled, 
+  .btn-disabled {
+    opacity: 0.5;
+    cursor: not-allowed !important;
+    pointer-events: none; // Evita cualquier clic accidental si estuviera bloqueado
   }
 }
 
