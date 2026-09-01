@@ -1,5 +1,5 @@
-import { NgClass } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { NgClass, isPlatformBrowser } from '@angular/common';
+import { Component, OnInit, PLATFORM_ID, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
@@ -11,44 +11,47 @@ import { RouterLink } from '@angular/router';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit {
+  private platformId = inject(PLATFORM_ID);
   
   consulta = { nombre: '', telefono: '', email: '', municipio: '', necesidad: '', privacidad: false };
 
   ngOnInit(): void {
-    // 1. Desactivamos la restauración automática de scroll del navegador para esta página
-    if ('scrollRestoration' in history) {
-      history.scrollRestoration = 'manual';
-    }
+    // Solo ejecutamos esto si estamos en el navegador real
+    if (isPlatformBrowser(this.platformId)) {
+      // 1. Desactivamos la restauración automática de scroll del navegador para esta página
+      if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+      }
 
-    // Obtenemos el estado de la navegación actual
-    const navigationState = history.state as { fromLegal?: boolean };
+      // Obtenemos el estado de la navegación actual
+      const navigationState = history.state as { fromLegal?: boolean };
 
-    // 2. Comprobamos si venimos específicamente de una página legal mediante el state
-    if (navigationState && navigationState.fromLegal) {
-      setTimeout(() => {
-        const seccionContacto = document.getElementById('contacto');
-        if (seccionContacto) {
-          seccionContacto.scrollIntoView({ behavior: 'smooth' });
-        } else {
-          window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-        }
-      }, 100);
-    } else {
-      // 3. Si se recarga la página o se entra de forma limpia, forzamos arriba del todo
-      window.scrollTo(0, 0);
-      
-      // Un segundo toque por si acaso el DOM tarda un milisegundo más en renderizar la altura total
-      setTimeout(() => {
+      // 2. Comprobamos si venimos específicamente de una página legal mediante el state
+      if (navigationState && navigationState.fromLegal) {
+        setTimeout(() => {
+          const seccionContacto = document.getElementById('contacto');
+          if (seccionContacto) {
+            seccionContacto.scrollIntoView({ behavior: 'smooth' });
+          } else {
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+          }
+        }, 100);
+      } else {
+        // 3. Si se recarga la página o se entra de forma limpia, forzamos arriba del todo
         window.scrollTo(0, 0);
-      }, 50);
+        
+        // Un segundo toque por si acaso el DOM tarda un milisegundo más en renderizar la altura total
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+        }, 50);
+      }
     }
   }
 
-  // Función para enviar por WhatsApp (la que ya tenías)
+  // Función para enviar por WhatsApp
   enviarAWhatsApp(event: Event): void {
     event.preventDefault();
     
-    // Validación básica de campos requeridos si se desea
     if (!this.consulta.nombre || !this.consulta.necesidad || !this.consulta.privacidad) {
       alert('Por favor, completa los campos obligatorios y acepta la política de privacidad.');
       return;
@@ -66,7 +69,7 @@ export class HomeComponent implements OnInit {
     window.open(`https://wa.me/${tuNumeroWhatsApp}?text=${mensaje}`, '_blank');
   }
 
-  // Nueva función para abrir Gmail directamente con los datos rellenados
+  // Función para abrir Gmail directamente con los datos rellenados
   enviarPorCorreo(event: Event): void {
     event.preventDefault();
 
@@ -85,10 +88,8 @@ export class HomeComponent implements OnInit {
     if (this.consulta.municipio) cuerpo += `Municipio del inmueble: ${this.consulta.municipio}\n`;
     cuerpo += `Necesidad: ${this.consulta.necesidad}\n`;
 
-    // Construimos la URL oficial de redacción web de Gmail
     const urlGmail = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(correoDestino)}&su=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpo)}`;
 
-    // Abre Gmail directamente en una nueva pestaña del navegador
     window.open(urlGmail, '_blank');
   }
 }
